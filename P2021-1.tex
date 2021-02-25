@@ -74,6 +74,7 @@ Probability on a finite sample space}
 
 \end{abstract}
 These notes document lectures given in recent years at Collegio Carlo Alberto in Torino. The aim is to present the basics of Probability with emphasis on the special mathematical tools of interest in contemporary applications to Machine Learning and Artificial Intelligence. This live document and is frequently updated. Please check the date at the bottom of this page.
+
 \tableofcontents
 
 The set $\mathcal M=\mathcal M(\Omega,\mathcal A)$ of all probability measures on the measurable space $(\Omega,\mathcal A)$ is a convex set,
@@ -84,9 +85,48 @@ Moreover, Jensen's inequality,
 \begin{equation*}
   \Phi\left(\expectat \mu f\right) \leq \expectat \mu {\Phi \circ f} \quad \text{if $\Phi$ is convex},  
 \end{equation*}
-is ubiquous.
+is ubiquitous.
 
-\begin{exercise}[Convex real functions] See \end{exercise}
+\begin{exercise}[Convex real functions] See
+  \cite[p.~61--65]{rudin:1987-3rd}
+Let $\phi$ be a real function defined on an open interval $I$. $\phi$ is
+convex if for all $x,y \in I$ and all $\theta \in [0,1]$ it holds
+\begin{equation*}
+  \phi((1-\theta)x + \theta y) \leq (1-\theta)x + \theta y \ .
+\end{equation*}
+
+Other equivalent conditions obtain with $x=s$,
+$u=y$, $t = (1-\theta)s + \theta u = s + \theta (u-s)$, $\theta \in
+]0,1[$, that is $s
+< t < u$: 
+\begin{gather*}
+  \frac{\phi(t)-\phi(s)}{t-s} \leq \frac{\phi(u)-\phi(s)}{u-s}  \\
+    \frac{\phi(t)-\phi(s)}{t-s} \leq \frac{\phi(u)-\phi(t)}{u-t} 
+\end{gather*}
+The inequalities above imply that
+\begin{equation*}
+  t \mapsto \frac{\phi(t)-\phi(s)}{t-s}
+\end{equation*}
+is increasing and both left- and right-derivatives exists. In
+particular $\phi$ is continuous.
+
+If $\phi'$ exists, we have the equivalent conditions
+\begin{equation*}
+  \phi(y) - \phi(x) \leq \phi'(x)(y-x) \ , \quad \text{$\phi'$ is non-decreasing}
+\end{equation*}
+
+Relevant examples are
+\begin{itemize}
+\item  $I = \reals$, $x \mapsto \frac1a \avalof x ^ a$, $a \geq 1$;
+  \item
+  $I = \reals$, $x \mapsto \euler^x$;
+\item $I = ]0,\infty[$, $x \mapsto - \log x$;
+\item $I = ]0,\infty[$, $x \mapsto x \log x$.
+\end{itemize}
+
+As a first application, we consider the \emph{large deviation inequalities}.
+
+\end{exercise}
 
 \section{Probability functions} We start 
 
