@@ -14,6 +14,7 @@
 \usepackage{bbm}
 \usepackage{mathtools}
 \usepackage{bibentry}
+\usepackage{cleveref}
 
 \newcommand{\OU}{\mathcal L}
 
@@ -87,7 +88,15 @@ Moreover, Jensen's inequality,
 \end{equation*}
 is ubiquitous.
 
-\begin{exercise}[Convex real functions] See
+\begin{example}[Probability simplex] Each probability measure $\mu$ on
+  $\Omega = \set{1,\dots,n}$ is uniquely characterized by its
+  \emph{probability function} $p \colon j \mapsto p(j) =
+  \mu(\set{j})$, $j=1,\dots,n$. The set of all probability functions
+  is the \emph{probability simplex}, represented as a convex subset of
+  $\reals^n$. Every probability function is the
+  convex combination of the canonical basis.
+  
+\begin{example}[Convex real functions] See
   \cite[p.~61--65]{rudin:1987-3rd}
 Let $\phi$ be a real function defined on an open interval $I$. $\phi$ is
 convex if for all $x,y \in I$ and all $\theta \in [0,1]$ it holds
@@ -155,8 +164,36 @@ Let us take the logarithm and minimize the RHS in $a > 0$.
 \begin{equation*}
   \log \mu(F_n \geq 1/2+\epsilon) \leq - \sup_{a > 0} \left(a(1/2 + \epsilon) - n \log\frac{1+\euler^{a/n}}2\right)
 \end{equation*}
-We will finalize the computation later.
-\end{exercise}
+We will finalize the computation later, see \cref{ex:cramer}.
+
+As a second example, we consider the \emph{entropy}
+
+Let $\mu$ be a \emph{probability measure} on
+$(X,\mathcal X)$. For each non-negative random variable $f \colon X$
+define its entropy to be
+\begin{equation*}
+  \entropyof{f} = \expectat \mu {\Phi\circ f} - \Phi\left(\expectat
+    \mu f\right), \quad \text{where} \quad \Phi(y) = y \log y \ ,
+\end{equation*}
+if each term is well defined.
+
+The function $\Phi$ is continous
+on $\reals_\geq$ as $\lim_{y \downarrow 0} y \log y = 0$ and has
+derivatives given for $y > 0$ by
+\begin{equation*}
+  \Phi'(y) = 1 + \log y \ , \quad \Phi''(y)= 1/y \ .  
+\end{equation*}
+It is strictly convex with minimum value $-\euler^{-1}$ at
+$\euler^{-1}$. The negative part of $\Phi\circ f$ is bounded by
+$\euler^{-1}$, then $\expectat \mu {\Phi\circ f}$ is well defined,
+possibly $+\infty$. Jensen's inequality gives
+\begin{equation*}
+  \Phi\left(\expectat \mu f\right) \leq \expectat \mu {\Phi\circ f} \ .
+\end{equation*}
+If the right-hand-side is finite, then the entropy is well
+defined. Otherwise, one has to require $\expectat \mu f < \infty$. The
+entropy is strictly positive, unless $f$ is constant.
+\end{example}
 
 \section{Probability functions}
 
@@ -324,7 +361,7 @@ The case $a=1$ has an immediate proof. If $a > 1$ use $(X+Y)^a = X(X+Y)^{a-1} + 
 \begin{example}[$L^2$-convergence and Weak LLN] Consider the Bernoulli $n$-scheme and define $S_n=X_1+\cdots+X_n$. Then $\expectat \theta {S_n/n} = \theta$ and $\expectat \theta {\left(\frac {S_n}n - \theta\right)^2} = \frac1n \theta(1-\theta) \to 0$ as $n \to \infty$.
 \end{example}
 
-\begin{example}[Cramer inequality and Strong LLN]
+\begin{example}[Cramer inequality and Strong LLN] \label{ex:cramer}
 Let $p$ be a probability function, $X$ a real random variable, $c >0$. For all $t > 0$,
 \begin{equation*}
   \probat p { X \geq c} = \probat p {tX \geq ct} = \probat p
