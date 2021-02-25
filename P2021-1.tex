@@ -147,14 +147,17 @@ For example, take $\phi(x) = \euler^(ax)$, $a > 0$. It follows
 \end{equation*}
 Consider the model of the flipping of a fair coin $n$ times.
 \begin{equation*}
-  \mu(F_n \geq c) \leq \euler^{-ac} \int \euler^{a F_n} \ d\mu =
-  \euler^{-ac} \sum_{k=0}^n \euler^{ak/n} \binom n k 2^{-n} = 2^{-n}
-  \euler^{-ac} \left(1 + \euler^{a/n}\right)^n \ .
+  \mu(F_n \geq 1/2 + \epsilon) \leq \euler^{-a(1+\epsilon)} \int \euler^{a F_n} \ d\mu =
+  \euler^{-a(1/2+\epsilon)} \sum_{k=0}^n \euler^{ak/n} \binom n k 2^{-n} = 2^{-n}
+  \euler^{-a(1/2+\epsilon)} \left(1 + \euler^{a/n}\right)^n \ .
 \end{equation*}
 Let us take the logarithm and minimize the RHS in $a > 0$.
 \begin{equation*}
-  \log \mu(F_n \geq c) \leq - \sup_{a > 0} \left(ac - n \log\frac{1+\euler^{a/n}}2\right)
+  \log \mu(F_n \geq 1/2+\epsilon) \leq - \sup_{a > 0} \left(a(1/2 + \epsilon) - n \log\frac{1+\euler^{a/n}}2\right)
 \end{equation*}
+We will finalize the computation later.
+
+
 \end{exercise}
 
 \section{Probability functions}
