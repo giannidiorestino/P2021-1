@@ -108,7 +108,11 @@ The inequalities above imply that
   t \mapsto \frac{\phi(t)-\phi(s)}{t-s}
 \end{equation*}
 is increasing and both left- and right-derivatives exists. In
-particular $\phi$ is continuous.
+particular $\phi$ is continuous. At each point $x$ there exist an $a$
+between the left and the right derivative such that
+\begin{equation*}
+  \phi(y) - \phi(x) \leq a (y-x) \ .
+\end{equation*}
 
 If $\phi'$ exists, we have the equivalent conditions
 \begin{equation*}
@@ -124,11 +128,37 @@ Relevant examples are
 \item $I = ]0,\infty[$, $x \mapsto x \log x$.
 \end{itemize}
 
-As a first application, we consider the \emph{large deviation inequalities}.
+As a first application, we consider the \emph{large deviation
+  inequalities}. Let $f$ be a non-negative random variable on
+$(\Omega,\mathcal A,\mu)$. As $x \geq c^{-1}(x \geq c)$ for all $x,c
+\geq 0$, the monotonicity of the integral implies
+\begin{equation*}
+  c \mu(f \geq c) = \int c (f \geq c) \ d\mu \leq \int f \ d\mu \ .
+\end{equation*}
+Now, let $\phi \colon \reals_+ \to \reals_+$ be strictly
+increasing. It follows
+\begin{equation*}
+  \mu(f \geq c) = \mu(\phi\circ f \geq \phi(c)) \leq \phi(c)^{-1}
+  \int \phi\circ f \ d\mu \ . 
+\end{equation*}
+For example, take $\phi(x) = \euler^(ax)$, $a > 0$. It follows
+\begin{equation*}
+  \mu(f \geq c) \leq \euler^{-ac} \int \euler^{af} \ d\mu \ . 
+\end{equation*}
+Consider the model of the flipping of a fair coin $n$ times.
+\begin{equation*}
+  \mu(F_n \geq c) \leq \euler^{-ac} \int \euler^{a F_n} \ d\mu =
+  \euler^{-ac} \sum_{k=0}^n \euler^{ak/n} \binom n k 2^{-n} = 2^{-n}
+  \euler^{-ac} \left(1 + \euler^{a/n}\right)^n \ .
+\end{equation*}
+Let us take the logarithm and minimize the RHS in $a > 0$.
+\begin{equation*}
+  \log \mu(F_n \geq c) \leq - \sup_{a > 0} \left(ac - n \log\frac{1+\euler^{a/n}}2\right)
+\end{equation*}
 
 \end{exercise}
 
-\section{Probability functions} We start 
+\section{Probability functions}
 
 \subsection{Convex sets}
 \label{sec:aside:-convex-set}
