@@ -16,6 +16,7 @@
 \usepackage{bibentry}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{tikz}
 
 \usepackage{cleveref}
 
@@ -165,9 +166,9 @@ Consider the model of the flipping of a fair coin $n$ times. The frequency of su
   \euler^{-a(1/2+\epsilon)} \left(1 + \euler^{a/n}\right)^n \ .
 \end{equation*}
 Let us take the logarithm and minimize the RHS w.r.t. $a > 0$.
-\begin{equation*}
+\begin{equation}\label{eq:LD-1}
   \log \mu(F_n \geq 1/2+\epsilon) \leq - \sup_{a > 0} \left(a(1/2 + \epsilon) - n \log\frac{1+\euler^{a/n}}2\right)
-\end{equation*}
+\end{equation}
 We will finalize the computation later.
 
 As a second application, we consider the \emph{entropy}. Let $\mu$ be a \emph{probability measure} on
@@ -237,9 +238,6 @@ finite intersection of half-spaces is a convex set called a
   }
   \label{fig:polyhedron}
 \end{figure}
-
-
-\paragraph{$\models$}
 \emph{A bounded polyhedron is a polytope}. 
 
 The vectors $x_0,\dots,x_m$ are \emph{affinely independent} if the vectors $x_1-x_0,\dots,x_m-x_0$ are linearly independent. They form a vector basis of the sub-space parallel to the generated polytope which in this case is called a \emph{simplex}. Two simplexes of the same dimension can be mapped one onto the other by an affine transformation that map their respective generators (the vertexes).    
@@ -255,12 +253,53 @@ The set of probability functions with support $\Omega_1 \subset \Omega$ form a s
 There is another simplex that represents the probability simplex $\Delta(\Omega)$ namely, the \emph{solid probability simplex}. In fact, we can represent a probability function by its $n-1$ values $\lambda_j,\dots,\lambda_{n-1}$ which form a vector in $\reals^{n-1}$ satisfying the conditions $\lambda_j \geq 0$ and $\sum_{j=1}^{n-1} \lambda_j \leq 1$. The vectors $e_1,\dots,e_{n-1},0 \in \reals^{n-1}$ are affinely independent and generate a simplex of dimension $n-1$ as $\sum_{J=1}^{n-1} \lambda_j e_j + \lambda_n 0$. The mapping between the two representations is given by $\reals^n \ni e_j \mapsto e_j \in \reals^{n-1}$ for $j=1,\dots,n-1$ and $\reals^n \ni e_n \mapsto 0 \in \reals^{n-1}$.
 
 \begin{example}
-  Study the probability simplex $\Delta(\set{1,2,3})$. In particular, construct the solid simplex and show it is a polyhedron. Consider the representation as an equilateral triangle. [Check for example \url{http://henr.in/crumbs/simplex/}
-%, \url{https://www.r-bloggers.com/drawing-surface-plots-on-the-ir^3-simplex/}]
+  Study the probability simplex $\Delta(\set{1,2,3})$. In particular, construct the solid simplex and show it is a polyhedron. Consider the representation as an equilateral triangle. [Check for example the R p0lots in \url{https://www.r-bloggers.com/drawing-surface-plots-on-the-ir^3-simplex/}]
 .\end{example}
 
 \begin{example}
-  Study the probability simplex on $\Omega = \set{0,1}^2$. It is a simplex of dimension 3 and it is interesting to consider its graphical representations. [Check the Wikipedia entry \url{https://en.wikipedia.org/wiki/Simplex}.]
+  Study the probability simplex on $\Omega = \set{0,1}^2$. It is a simplex of dimension 3 and it is interesting to consider its graphical representations. This example is especially instructive because of the product structure of the support [Check the Wikipedia entry \url{https://en.wikipedia.org/wiki/Simplex} for general cases.]
+\begin{figure}
+  \begin{tabular}{ccc}
+    \begin{tikzpicture}[scale=2.8,baseline = (current bounding box.center)]
+\node (n00) at (1,-.5) {$\delta_{11}$};
+\node (n10) at (0,0) {$\delta_{21}$};
+\node (n01) at (2,0) {$\delta_{12}$};
+\node (n11) at (1,1.5) {$\delta_{22}$};
+\node (K1) at (5/6,-1/12) {};
+\node (gK1) at (5/6-1/12,-1/12) {$\gamma_1$};
+\node (K2) at (5/6,1/4) {};
+\node (gK2) at (5/6-1/12,1/4) {$\gamma_2$};
+\draw[dashed] (n01) -- (n10);
+\filldraw [red] (5/6,1/4) circle (.5pt);
+\draw [red] (5/6,-1/12) circle (.5pt);
+\foreach \from/\to in {n00/n10,n00/n01,n11/n10,n11/n01,n00/n11}
+\draw[thick] (\from) -- (\to);
+\draw [thick,red,dashed] (K1) -- (K2); % was: gray, dashed
+\end{tikzpicture} & $\longrightarrow$ &
+    \begin{tikzpicture}[scale=3,baseline = (current bounding box.center)]
+\node (n00) at (0,0) {$\delta_1\otimes\delta_1$};
+\node (n10) at (1,0) {$\delta_2\otimes\delta_1$};
+\node (n01) at (0,1) {$\delta_1\otimes\delta_2$};
+\node (n11) at (1,1) {$\delta_2\otimes\delta_2$};
+\foreach \from/\to in {n00/n01,n01/n11,n11/n10,n10/n00}
+\draw[thick] (\from) -- (\to);
+\filldraw [red] (1/2,2/3) circle (.5pt);
+\end{tikzpicture}
+  \end{tabular}
+  \caption{The arrow is the marginalization function of the probability simplex $\Delta(\set{1,2}^2)$ to the product of the two marginal simplexes $\Delta(\set{1,2}) \times \Delta(\set{1,2})$. Each vertex of the left simplex is mapped to a vertex of the right polytope, $\delta_{ij} \mapsto \delta_i \otimes \delta_j$. The dashed segment from $\gamma_1$ to $\gamma_2$ represents the coupling polytope of the margins represented by the circle in the right polytope. Notice that $\gamma_1$ belongs to the facet opposite to $\delta_{22}$, while $\gamma_2$ belongs to the facet opposite to $\delta_{12}$.}\label{fig:2x2}
+  \end{figure}
+See \cref{fig:2x2} (taken from a paper). The dashed segment represents the set of couplings $\mathcal P((1/2,1/2),(2/3,1/3))$. The two end-points are
+\begin{equation*}
+\gamma_1 =
+    \begin{pmatrix}
+      1/6 & 1/3 \\ 1/2 & 0
+    \end{pmatrix} \ , \quad \gamma_2 =
+\begin{pmatrix}
+  1/2 & 0 \\ 1/6 & 1/3
+\end{pmatrix} \ .
+\end{equation*}
+The supports of $\gamma_1$ and $\gamma_2$ have $2\cdot2-1 = 3$ arcs. The support of $\gamma_2$ is a looped tree, while the support of $\gamma_1$ is not because of the cycle  $1 \rightleftarrows 2$.
+The support of each non-vertex coupling $\gamma = (1-\lambda)\gamma_1 + \lambda \gamma_2$, $0 < \lambda < 1$, has $4$ arcs.
 \end{example}
 
 \subsection{Aside: differentials}
@@ -286,7 +325,12 @@ belongs to the subspace parallel to the simplex. If $\lambda(\bar \omega;\bar \t
 
 \subsection{Aside: convex functions}
 
-If a convex set $A \in \reals^m$ is open, then every straight line intersects $A$ in an open interval or an empty interval. For example, the subset of the solid probability simplex consisting of strictly positive probability functions is an open convex set. The closure $\overline A$ of an open convex set $A$ is a convex set. The difference $\overline A \setminus A$ is the boundary of the convex set. Let $x$ be a point of the boundary. A unit vector $u$ applied at $x$ enters $A$ if there is a $y \in A$ such that $u = (y-x)/\normof{y-x}$. The set of all entering vectors cannot contain two antipodal elements so that there is a unit vector $w$ such that $\scalarof w u < 0$ for all entering unit vector. This argument leads to the proof of the following Isolation Theorem: \emph{Let $A$ be an open convex set in $\reals^m$ and let $x$ be in the border of $A$. There exists a unit vector $w$ such that  $\scalarof w {y-x} < 0$ for all $y \in A$ that is, the half-space contains the convex set}.\footnote{See a full proof in \cite[p 45-46]{barvinok:2002}.}
+If a convex set $A \in \reals^m$ is open, then every straight line intersects $A$ in an open interval or an empty interval. For example, the subset of the solid probability simplex consisting of strictly positive probability functions is an open convex set. The closure $\overline A$ of an open convex set $A$ is a convex set. The difference $\overline A \setminus A$ is the boundary of the convex set. Let $x$ be a point of the boundary. A unit vector $u$ applied at $x$ enters $A$ if there is a $y \in A$ such that $u = (y-x)/\normof{y-x}$. The set of all entering vectors cannot contain two antipodal elements so that there is a unit vector $w$ such that $\scalarof w u < 0$ for all entering unit vector. This argument leads to the proof of the following 
+
+\bigskip
+\paragraph{Isolation Theorem} \emph{Let $A$ be an open convex set in $\reals^m$ and let $x$ be in the border of $A$. There exists a unit vector $w$ such that  $\scalarof w {y-x} < 0$ for all $y \in A$ that is, the half-space contains the convex set}.
+
+See a full proof in \cite[p 45-46]{barvinok:2002}.\qed
 
 A function $\phi$ defined on $\reals^n$ with values in $\overline\reals = \reals \cup \set{+\infty}$ is convex if the \emph{epigraph} $\epiof \phi = \setof {(x,t)}{ x \in \domof \phi, t \in \reals, \phi(x) \leq t}$ is a convex subset of $\reals^{n+1}$. We define $\domof \phi$ to be the set where $\phi$ takes finite values. \emph{If $\phi$ is convex, then $\domof \phi$ is a convex subset of $\reals^n$.} If $x_1,x_2 \in \domof \phi$, then there exist $(x_1,t_1), (x_2,t_2) \in \epiof \phi$ and for all $\lambda \in [0,1]$ it holds $((1-\lambda)x_1+\lambda x_2,(1-\lambda)t_1+\lambda t_2) \in \epiof \phi$. In particular, $\phi((1-\lambda)x_1+\lambda x_2) < + \infty$. \emph{If $\phi$ is  convex, then $(1-\lambda)\phi(x_1) + \lambda \phi(x_2) \leq \phi((1-\lambda)x_1+\lambda x_2)$ for all $x_1,x_2 \in \reals^n$ and $\lambda \in [0,1]$.} If any of $x_1$, $x_2$ is not in $\domof \phi$ the inequality is trivially satisfied. Otherwise, it is the same computation as above. Conversely, if $\phi \colon \domof \phi \to \reals$ and $(1-\lambda)\phi(x_1) + \lambda \phi(x_2) \leq \phi((1-\lambda)x_1+\lambda x_2)$ for all $x_1,x_2 \in \domof \phi$ and $\lambda \in [0,1]$, then the function extended with value $+\infty$ outside the domain is convex.
 
@@ -331,7 +375,19 @@ Show that the following functions are convex and compute the gradient mapping if
 \item $\reals^n \ni x \mapsto -\logof{\scalarof a x}$, $a \in \reals^n$.
 \item $\reals_+ \ni x \mapsto x\log x$.
 \end{enumerate}
+\end{example}
 
+\begin{example}[Conjugation] Let $\phi \colon \reals_+ \to \reals_+$ be strictly increasing and write $\psi=\phi^{-1}$. Write
+\begin{equation*}
+\Phi(x) = \int_0^x \phi(u) \ du  \qquad \Psi(y) = \int_0^y \psi(v) \ dv \ .
+\end{equation*}
+Then (make a picture)
+\begin{gather*}
+    \Phi(x) + \Psi(y) \geq xy \\
+    \Phi(x) + \Psi(y) = xy \quad \text{if $y = \phi(x)$ or $x = \psi(y)$} \\
+    \Psi(y) = \sup_{x \geq 0} (xy - \Phi(x))
+\end{gather*}
+Compare with \cref{eq:LD-1}.
 \end{example}
 
 \subsection{Inequalities for the expectation}
