@@ -8,7 +8,7 @@
 
 \usepackage{fullpage}
 \usepackage{amsmath,amssymb}
-\usepackage{mathabx}
+%\usepackage{mathabx}
 \usepackage{macros}
 \usepackage{bm}
 \usepackage{bbm}
@@ -325,20 +325,46 @@ belongs to the subspace parallel to the simplex. If $\lambda(\bar \omega;\bar \t
 
 \subsection{Aside: convex functions}
 
-If a convex set $A \in \reals^m$ is open, then every straight line intersects $A$ in an open interval or an empty interval. For example, the subset of the solid probability simplex consisting of strictly positive probability functions is an open convex set. The closure $\overline A$ of an open convex set $A$ is a convex set. The difference $\overline A \setminus A$ is the boundary of the convex set. Let $x$ be a point of the boundary. A unit vector $u$ applied at $x$ enters $A$ if there is a $y \in A$ such that $u = (y-x)/\normof{y-x}$. The set of all entering vectors cannot contain two antipodal elements so that there is a unit vector $w$ such that $\scalarof w u < 0$ for all entering unit vector. This argument leads to the proof of the following 
+If a convex set $A \in \reals^m$ is open, then every straight line
+intersects $A$ in an open interval or an empty interval. For example,
+the subset of the solid probability simplex consisting of strictly
+positive probability functions is an open convex set. The closure
+$\overline A$ of an open convex set $A$ is a convex set. The
+difference $\overline A \setminus A$ is the boundary of the convex
+set.
 
 \bigskip
-\paragraph{Isolation Theorem} \emph{Let $A$ be an open convex set in $\reals^m$ and let $x$ be in the border of $A$. There exists a unit vector $w$ such that  $\scalarof w {y-x} < 0$ for all $y \in A$ that is, the half-space contains the convex set}.
+\paragraph{Supporting hyperplane} \emph{Let $A$ be an open convex set in $\reals^m$ and let $x$ be in the border of $A$. There exists a unit vector $w$ such that  $\scalarof w {y-x} < 0$ for all $y \in A$ that is, the half-space contains the convex set}.
 
-See a full proof in \cite[p 45-46]{barvinok:2002}.\qed
+Let $x$ be a point of the boundary. A unit vector $u$ applied at $x$
+enters $A$ if there is a $y \in A$ such that $u =
+(y-x)/\normof{y-x}$. The set of all entering vectors cannot contain
+two antipodal elements so that there is a unit vector $w$ such that
+$\scalarof w u < 0$ for all entering unit vector. See a full proof in \cite[p
+45-46]{barvinok:2002} and \cref{fig:hyperplanes}.\qed
 
-A function $\phi$ defined on $\reals^n$ with values in $\overline\reals = \reals \cup \set{+\infty}$ is convex if the \emph{epigraph} $\epiof \phi = \setof {(x,t)}{ x \in \domof \phi, t \in \reals, \phi(x) \leq t}$ is a convex subset of $\reals^{n+1}$. We define $\domof \phi$ to be the set where $\phi$ takes finite values. \emph{If $\phi$ is convex, then $\domof \phi$ is a convex subset of $\reals^n$.} If $x_1,x_2 \in \domof \phi$, then there exist $(x_1,t_1), (x_2,t_2) \in \epiof \phi$ and for all $\lambda \in [0,1]$ it holds $((1-\lambda)x_1+\lambda x_2,(1-\lambda)t_1+\lambda t_2) \in \epiof \phi$. In particular, $\phi((1-\lambda)x_1+\lambda x_2) < + \infty$. \emph{If $\phi$ is  convex, then $(1-\lambda)\phi(x_1) + \lambda \phi(x_2) \leq \phi((1-\lambda)x_1+\lambda x_2)$ for all $x_1,x_2 \in \reals^n$ and $\lambda \in [0,1]$.} If any of $x_1$, $x_2$ is not in $\domof \phi$ the inequality is trivially satisfied. Otherwise, it is the same computation as above. Conversely, if $\phi \colon \domof \phi \to \reals$ and $(1-\lambda)\phi(x_1) + \lambda \phi(x_2) \leq \phi((1-\lambda)x_1+\lambda x_2)$ for all $x_1,x_2 \in \domof \phi$ and $\lambda \in [0,1]$, then the function extended with value $+\infty$ outside the domain is convex.
+\begin{figure}
+  \centering
+  \includegraphics[width=.40\textwidth]{pictures/Supporting_hyperplane1.png} 
+    \includegraphics[width=.40\textwidth]{pictures/Supporting_hyperplane2.png}
+  \caption{Supporting hyperplane from \href{https://en.wikipedia.org/wiki/Supporting_hyperplane}{Wikipedia}}
+  \label{fig:hyperplanes}
+\end{figure}
+
+A function $\phi$ defined on on a domain in $\reals^n$ with values in
+$\overline\reals = \reals \cup \set{+\infty}$ is convex if the
+\emph{epigraph}
+$\epiof \phi = \setof {(x,t)}{ x \in \domof \phi, t \in \reals,
+  \phi(x) \leq t}$ is a convex subset of $\reals^{n+1}$. This
+definition is equivalent to the standard one in case of finite values.
+
+We define $\domof \phi$ to be the set where $\phi$ takes finite values. \emph{If $\phi$ is convex, then $\domof \phi$ is a convex subset of $\reals^n$.} If $x_1,x_2 \in \domof \phi$, then there exist $(x_1,t_1), (x_2,t_2) \in \epiof \phi$ and for all $\lambda \in [0,1]$ it holds $((1-\lambda)x_1+\lambda x_2,(1-\lambda)t_1+\lambda t_2) \in \epiof \phi$. In particular, $\phi((1-\lambda)x_1+\lambda x_2) < + \infty$. \emph{If $\phi$ is  convex, then $(1-\lambda)\phi(x_1) + \lambda \phi(x_2) \leq \phi((1-\lambda)x_1+\lambda x_2)$ for all $x_1,x_2 \in \reals^n$ and $\lambda \in [0,1]$.} If any of $x_1$, $x_2$ is not in $\domof \phi$ the inequality is trivially satisfied. Otherwise, it is the same computation as above. Conversely, if $\phi \colon \domof \phi \to \reals$ and $(1-\lambda)\phi(x_1) + \lambda \phi(x_2) \leq \phi((1-\lambda)x_1+\lambda x_2)$ for all $x_1,x_2 \in \domof \phi$ and $\lambda \in [0,1]$, then the function extended with value $+\infty$ outside the domain is convex.
 
 Let $\phi$ be convex, and define the strict epigraph be open convex set
 \begin{equation*}
 \setof {(x,t)}{ x \in \domof \phi, t \in \reals, \phi(x) < t} \ .
 \end{equation*}
-Assume that at a point $(x,\phi(x))$ the entering unit vectors are not all horizontal. Then the Isolation Theorem implies that there exist at least a \emph{supporting hyper-plane}. In such a case, $\phi$ on all such points \emph{$\phi$ is the point-wise maximum of the supporting affine functions}. In the differentiable case, the tangent plane is the unique supporting hyperplane. If $\phi \in C^2(\mathcal O)$ then the Hessian matrix is non-negative definite.
+Assume that at a point $(x,\phi(x))$ the entering unit vectors of the strict epigraph are not all horizontal. Then the Isolation Theorem implies that there exist at least a \emph{supporting hyper-plane}. In such a case, \emph{$\phi$ is the point-wise maximum of the supporting affine functions}. In the differentiable case, the tangent plane is the unique supporting hyperplane. If $\phi \in C^2(\mathcal O)$ then the Hessian matrix is non-negative definite.
 
 \emph{Let $\phi$ be convex and let $\phi$ be differentiable on an open convex set $\mathcal O$. Then $\nabla \phi \colon \mathcal O \to \reals^n$ is \emph{monotone} i.e., $\scalarof {\nabla \phi(x) - \nabla \phi(y)}{x-y} \geq 0$ for $x,y \in \mathcal O$.} We can re-write the basic inequality as
 \begin{equation*}
@@ -387,7 +413,7 @@ Then (make a picture)
     \Phi(x) + \Psi(y) = xy \quad \text{if $y = \phi(x)$ or $x = \psi(y)$} \\
     \Psi(y) = \sup_{x \geq 0} (xy - \Phi(x))
 \end{gather*}
-Compare with \cref{eq:LD-1}.
+Compare with \cref{eq:LD-1}. This can be generalised to $\reals^n$.
 \end{example}
 
 \subsection{Inequalities for the expectation}
