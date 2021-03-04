@@ -289,7 +289,7 @@ There is another simplex that represents the probability simplex $\Delta(\Omega)
   \end{figure}
 See \cref{fig:2x2} (taken from a papers). (Review the effect of the push forward on integrals and probability functions.) The dashed segment represents the set of \emph{couplings} $\mathcal P((1/2,1/2),(2/3,1/3))$. That is,
 \begin{equation*}
-  p_1(x) = (X_{\#} p)(x) - \sum_y p(x,y) \quad   p_2(y) = (Y_{\#} p)(y) - \sum_x p(x,y) 
+  p_1(x) = (X_{\#} p)(x) = \sum_y p(x,y) \quad   p_2(y) = (Y_{\#} p)(y) = \sum_x p(x,y) 
 \end{equation*}
 and
 \begin{equation*}
@@ -304,7 +304,7 @@ and
       q(1,2) + q(2,2) &= 1/3 
       \end{cases}
     \end{equation*}
-From the 1st and the 3dr equation, take $p(1,1) = \theta$ as a parameter, the parametrized solution is
+From the 1st and the 3dr equation, take $q(1,1) = \theta$ as a parameter, the parametrized solution is
 \begin{equation*}
   \theta \mapsto p_\theta =
   \begin{bmatrix}
@@ -370,7 +370,7 @@ difference $\overline A \setminus A$ is the boundary of the convex
 set.
 
 \bigskip
-\paragraph{Supporting hyperplane} \emph{Let $A$ be an open convex set in $\reals^m$ and let $x$ be in the border of $A$. There exists a unit vector $w$ such that  $\scalarof w {y-x} < 0$ for all $y \in A$ that is, the half-space contains the convex set}.
+\paragraph{Isolation theorem, Supporting hyperplane} \emph{Let $A$ be an open convex set in $\reals^m$ and let $x$ be in the border of $A$. There exists a unit vector $w$ such that  $\scalarof w {y-x} < 0$ for all $y \in A$ that is, the half-space contains the convex set}.
 
 Let $x$ be a point of the boundary. A unit vector $u$ applied at $x$
 enters $A$ if there is a $y \in A$ such that $u =
