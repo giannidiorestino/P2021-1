@@ -256,8 +256,7 @@ There is another simplex that represents the probability simplex $\Delta(\Omega)
   Study the probability simplex $\Delta(\set{1,2,3})$. In particular, construct the solid simplex and show it is a polyhedron. Consider the representation as an equilateral triangle. [Check for example the R p0lots in \url{https://www.r-bloggers.com/drawing-surface-plots-on-the-ir^3-simplex/}]
 .\end{example}
 
-\begin{example}
-  Study the probability simplex on $\Omega = \set{0,1}^2$. It is a simplex of dimension 3 and it is interesting to consider its graphical representations. This example is especially instructive because of the product structure of the support [Check the Wikipedia entry \url{https://en.wikipedia.org/wiki/Simplex} for general cases.]
+\begin{example}[Probability simplex on $\Omega = \set{1,2}^2$] It is a simplex of dimension 3 with vertexes $\delta_i \otimes \delta_j$, $i,j = 1,2$. It is interesting to consider its graphical representations as a tetraedron. This example is especially instructive because of the product structure of the support. Check the Wikipedia entry \url{https://en.wikipedia.org/wiki/Simplex} for general cases. This allows the illustration of the effect of the push-forward.
 \begin{figure}
   \begin{tabular}{ccc}
     \begin{tikzpicture}[scale=2.8,baseline = (current bounding box.center)]
@@ -288,7 +287,32 @@ There is another simplex that represents the probability simplex $\Delta(\Omega)
   \end{tabular}
   \caption{The arrow is the marginalization function of the probability simplex $\Delta(\set{1,2}^2)$ to the product of the two marginal simplexes $\Delta(\set{1,2}) \times \Delta(\set{1,2})$. Each vertex of the left simplex is mapped to a vertex of the right polytope, $\delta_{ij} \mapsto \delta_i \otimes \delta_j$. The dashed segment from $\gamma_1$ to $\gamma_2$ represents the coupling polytope of the margins represented by the circle in the right polytope. Notice that $\gamma_1$ belongs to the facet opposite to $\delta_{22}$, while $\gamma_2$ belongs to the facet opposite to $\delta_{12}$.}\label{fig:2x2}
   \end{figure}
-See \cref{fig:2x2} (taken from a paper). The dashed segment represents the set of couplings $\mathcal P((1/2,1/2),(2/3,1/3))$. The two end-points are
+See \cref{fig:2x2} (taken from a papers). (Review the effect of the push forward on integrals and probability functions.) The dashed segment represents the set of \emph{couplings} $\mathcal P((1/2,1/2),(2/3,1/3))$. That is,
+\begin{equation*}
+  p_1(x) = (X_{\#} p)(x) - \sum_y p(x,y) \quad   p_2(y) = (Y_{\#} p)(y) - \sum_x p(x,y) 
+\end{equation*}
+and
+\begin{equation*}
+  \mathcal P(p_1,p_2) = \setof{q}{X_{\#} q = p_1,X_{\#} = p_2}
+    \end{equation*}
+    With the given margins,
+    \begin{equation*}
+      \begin{cases}
+        q(1,1) + q(1,2) &= 1/2 \\
+      q(2,1) + q(2,2) &= 1/2 \\
+      q(1,1) + q(2,1) &= 2/3 \\
+      q(1,2) + q(2,2) &= 1/3 
+      \end{cases}
+    \end{equation*}
+From the 1st and the 3dr equation, take $p(1,1) = \theta$ as a parameter, the parametrized solution is
+\begin{equation*}
+  \theta \mapsto p_\theta =
+  \begin{bmatrix}
+    \theta & 1/2 - \theta \\ 2/3 - \theta & \theta - 1/6 
+  \end{bmatrix} \ , 
+  \quad \frac16 \leq \theta \leq \frac 12 \ .
+\end{equation*}
+The two end-points are
 \begin{equation*}
 \gamma_1 =
     \begin{pmatrix}
@@ -298,8 +322,20 @@ See \cref{fig:2x2} (taken from a paper). The dashed segment represents the set o
   1/2 & 0 \\ 1/6 & 1/3
 \end{pmatrix} \ .
 \end{equation*}
-The supports of $\gamma_1$ and $\gamma_2$ have $2\cdot2-1 = 3$ arcs. The support of $\gamma_2$ is a looped tree, while the support of $\gamma_1$ is not because of the cycle  $1 \rightleftarrows 2$.
-The support of each non-vertex coupling $\gamma = (1-\lambda)\gamma_1 + \lambda \gamma_2$, $0 < \lambda < 1$, has $4$ arcs.
+for the \emph{cost} $c =
+\begin{bmatrix}
+  0 & 1 \\ 1 & 0
+\end{bmatrix}$ the expected cost is
+\begin{equation*}
+ C(\theta) = \expectat \theta c = \sum_{x,y=1,2} c(x,y) p(x,y;\theta) = (1/2 - \theta) + (2/3 - \theta) = 5/6 - 2\theta
+\end{equation*}
+and the expected cost is minimum if $\theta = 1/2$. Such cost is
+realized with the \emph{transport plan} $\gamma_2$.  The supports of
+$\gamma_1$ and $\gamma_2$ have $2\cdot2-1 = 3$ arcs. The support of
+$\gamma_2$ is a looped tree, while the support of $\gamma_1$ is not
+because of the cycle $1 \rightleftarrows 2$.  The support of each
+non-vertex coupling $\gamma = (1-\lambda)\gamma_1 + \lambda \gamma_2$,
+$0 < \lambda < 1$, has $4$ arcs. For more information, check the keyword ``optimal transport.''
 \end{example}
 
 \subsection{Aside: differentials}
@@ -403,18 +439,49 @@ Show that the following functions are convex and compute the gradient mapping if
 \end{enumerate}
 \end{example}
 
-\begin{example}[Conjugation] Let $\phi \colon \reals_+ \to \reals_+$ be strictly increasing and write $\psi=\phi^{-1}$. Write
+\begin{example}[Convex conjugation] Let $\phi \colon \reals_+ \to \reals_+$ be strictly increasing and write $\psi=\phi^{-1}$. Write
 \begin{equation*}
 \Phi(x) = \int_0^x \phi(u) \ du  \qquad \Psi(y) = \int_0^y \psi(v) \ dv \ .
 \end{equation*}
-Then (make a picture)
+Extend with 0 when necessary. Then (make a picture!)
 \begin{gather*}
-    \Phi(x) + \Psi(y) \geq xy \\
-    \Phi(x) + \Psi(y) = xy \quad \text{if $y = \phi(x)$ or $x = \psi(y)$} \\
-    \Psi(y) = \sup_{x \geq 0} (xy - \Phi(x))
+    \Phi(x) + \Psi(y) \geq xy \quad \text{Fenchel's inequality}\\
+    \Phi(x) + \Psi(y) = xy \quad \text{if $y = \phi(x)$ or $x = \psi(y)$} \quad \text{Legendre's equality}\\
+    \Psi(y) = \sup_{x \geq 0} (xy - \Phi(x)) \quad \text{convex conjugation} 
 \end{gather*}
-Compare with \cref{eq:LD-1}. This can be generalised to $\reals^n$.
+Compare with \cref{eq:LD-1}. This can be generalised to $\reals^n$ using the last definition and the monotonicity of the gradient.
 \end{example}
+
+Given a measure space $(\Omega,\mathcal A, \mu)$ a non-negative measurable function $p$ is a \emph{probability density} if $\int p \ d\mu = 1$. In such a case, the mapping
+\begin{equation*}
+  p \cdot \mu \colon \mathcal A \ni A \mapsto \int_A p \ d\mu = \int (A) p\ d\mu
+\end{equation*}
+is a probability measure.
+
+In fact. $p \cdot \mu (\emptyset) = 0$ because $(\emptyset) = 0$, $p \cdot \mu(\Omega) = 1$ because $(\Omega) = 1$. If $(A_j)$ is a sequence of disjoint events, then $(\cup_j A_j) = \sum_j (A_j) = \sup_n \sum_{j=1}^n (A_j)$ and the result follows from additivity and monotone continuy.
+
+The integral with respect to the push-forward of a probability measure given by a density is computed as follows. $X_{\#} \mu B = \mu(X^{-1}(B) = \int (X^{-1}(B)) \ d\mu = \int (B) \circ X d\mu$. It follows, by linearity, that for each non-negative simple function $f$ it holds $\int f \circ X d\mu = \int f d X_{\#}\mu$. By approximation from below the equality holds for all non-negative measurable function. In conclusion, the push-forward measure is characterised by the \emph{change of variable} formula
+\begin{equation*}
+  \int f \circ X \ d\mu = \int f dX_{\#}\mu \ , \quad f \in \mathcal L^+
+\end{equation*}
+In the case the measure is actually a probability measure defined by a density $p$,
+\begin{equation*}
+ \int f \ d(X_{\#}p \cdot \mu) = \int f \circ X d (p \cdot \mu) = \int f \circ X p \ d\mu 
+\end{equation*}
+Assume there exists a $\hat p$ such that the RHS equals $\int f \circ X \hat p \circ X \ d\mu$. Then, we can apply the chage of variable for $\mu$, and get
+\begin{equation*}
+  \int f \ d(X_{\#}p \cdot \mu) = \int f \hat p \ dX_{\#}\mu = \int f d \hat p \cdot X_{\#}\mu \ .
+\end{equation*}
+As $f$ is arbitrary, we have comuted the effect on the density of the push forward:
+\begin{equation*}
+  X_{\#}(p \cdot \mu) = \hat p \cdot X_{\#} \mu \quad \text{where} \forall f \in \mathcal L^+ \ \quad \int f \circ X p \ d\mu = \int f \circ X \hat p \circ X \ d\mu 
+\end{equation*}
+
+Now, a probability function $p$ is a density with respect to the counting measure. If $\Omega$ is finite, then the counting measure $\#(A) = \text{number of elements of $A$}$ is such that $\int_A p d\# = \sum_{\omega \in A} p(\omega)$. Consider now the push forward. In this case,
+\begin{equation*}
+  \int f \circ X p d\# = \sum_\omega f(X(\omega)) p(\omega) = \sum_{x \in \operatorname{Im}X} f(x) \sum_{x = X(\omega)} p(\omega) \ ,
+\end{equation*}
+which, in turn, gives $\hat p(x) = \sum_{x = X(\omega)} p(\omega)$. Usually, one writes $p_X$ to denote the push-forward density.
 
 \subsection{Inequalities for the expectation}
 \label{sec:ineg-expect}
@@ -457,7 +524,7 @@ Let $U$, $V$ be strictly positive random variables and define $u$ and $v$ by $\e
 A little algebra produces the H\'older inequality for strictly positive random variable. Now consider $U + \epsilon$, $V+\epsilon$ and the limit $\epsilon\to0$ to prove the inequality for non-negative random variables. Finally, take $U = \aval X$ and $V = \aval Y$ and observe that $XY \leq \aval X \aval Y$ to conclude the proof.
 \end{example}
 
-\begin{example}[Conjiugation]
+\begin{example}[Convex conjugation]
 If $\phi$ is increasing on $[0,\infty[$ and $\psi=\phi^{-1}$, then the two primitives $\Phi$ and $\Psi$ satisfy the Fentchel inequality
 \begin{equation*}
     \Phi(x) + \Psi(y) \geq xy \ .
