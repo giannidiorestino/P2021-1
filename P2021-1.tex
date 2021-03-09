@@ -452,36 +452,99 @@ Extend with 0 when necessary. Then (make a picture!)
 Compare with \cref{eq:LD-1}. This can be generalised to $\reals^n$ using the last definition and the monotonicity of the gradient.
 \end{example}
 
-Given a measure space $(\Omega,\mathcal A, \mu)$ a non-negative measurable function $p$ is a \emph{probability density} if $\int p \ d\mu = 1$. In such a case, the mapping
+\subsection{Recap: density} Given a measure space
+$(\Omega,\mathcal A, \mu)$ a non-negative measurable function $p$ is a
+\emph{probability density} if $\int p \ d\mu = 1$. In such a case, the
+mapping
 \begin{equation*}
   p \cdot \mu \colon \mathcal A \ni A \mapsto \int_A p \ d\mu = \int (A) p\ d\mu
 \end{equation*}
-is a probability measure.
+is a probability measure. Recall the notation for the indicator (aka
+characteristic) function $(A) = \one_A = \chi_A$.
 
-In fact. $p \cdot \mu (\emptyset) = 0$ because $(\emptyset) = 0$, $p \cdot \mu(\Omega) = 1$ because $(\Omega) = 1$. If $(A_j)$ is a sequence of disjoint events, then $(\cup_j A_j) = \sum_j (A_j) = \sup_n \sum_{j=1}^n (A_j)$ and the result follows from additivity and monotone continuy.
+In fact. $p \cdot \mu (\emptyset) = 0$ because $(\emptyset) = 0$,
+$p \cdot \mu(\Omega) = 1$ because $(\Omega) = 1$. If $(A_j)$ is a
+sequence of disjoint events, then
+$(\cup_j A_j) = \sum_j (A_j) = \sup_n \sum_{j=1}^n (A_j)$ and the
+result follows from additivity and monotone continuy.
 
-The integral with respect to the push-forward of a probability measure given by a density is computed as follows. $X_{\#} \mu B = \mu(X^{-1}(B) = \int (X^{-1}(B)) \ d\mu = \int (B) \circ X d\mu$. It follows, by linearity, that for each non-negative simple function $f$ it holds $\int f \circ X d\mu = \int f d X_{\#}\mu$. By approximation from below the equality holds for all non-negative measurable function. In conclusion, the push-forward measure is characterised by the \emph{change of variable} formula
-\begin{equation*}
-  \int f \circ X \ d\mu = \int f dX_{\#}\mu \ , \quad f \in \mathcal L^+
-\end{equation*}
-In the case the measure is actually a probability measure defined by a density $p$,
-\begin{equation*}
- \int f \ d(X_{\#}p \cdot \mu) = \int f \circ X d (p \cdot \mu) = \int f \circ X p \ d\mu 
-\end{equation*}
-Assume there exists a $\hat p$ such that the RHS equals $\int f \circ X \hat p \circ X \ d\mu$. Then, we can apply the chage of variable for $\mu$, and get
-\begin{equation*}
-  \int f \ d(X_{\#}p \cdot \mu) = \int f \hat p \ dX_{\#}\mu = \int f d \hat p \cdot X_{\#}\mu \ .
-\end{equation*}
-As $f$ is arbitrary, we have comuted the effect on the density of the push forward:
-\begin{equation*}
-  X_{\#}(p \cdot \mu) = \hat p \cdot X_{\#} \mu \quad \text{where} \forall f \in \mathcal L^+ \ \quad \int f \circ X p \ d\mu = \int f \circ X \hat p \circ X \ d\mu 
-\end{equation*}
+Given a mapping $X$ which is measurable from $(\Omega,\mathcal A)$ to
+$(S,\mathcal S)$, the push-back of $\mathcal S$ is the
+$\sigma$-algebra $X^{-1}(\mathcal S)$. \emph{A mapping
+  $f \colon \Omega \to \reals$ is $X^{-1}(\mathcal S)$-measurable if,
+  and only if, $f = \hat f \circ X$ for some $\hat f$ measurale on
+  $(S,\mathcal S)$.} One direction is obvious. In the other direction,
+one starts with the case $f = (A)$. The push-forward of $\mu$ is
+$X_\sharp \mu = \mu \circ X^{-1}$. \emph{$\nu = X_\sharp \mu$ if, and
+  only if, $\int_S \phi \ d\nu = \int_\Omega \phi \circ X \ d\mu$ for
+  all non-negative measurable $\phi$.} Again, start the proof with the
+case $\phi = (B)$.
 
-Now, a probability function $p$ is a density with respect to the counting measure. If $\Omega$ is finite, then the counting measure $\#(A) = \text{number of elements of $A$}$ is such that $\int_A p d\# = \sum_{\omega \in A} p(\omega)$. Consider now the push forward. In this case,
+The integral with respect to the push-forward of
+a probability measure given by a density is computed as
+follows.
 \begin{equation*}
-  \int f \circ X p d\# = \sum_\omega f(X(\omega)) p(\omega) = \sum_{x \in \operatorname{Im}X} f(x) \sum_{x = X(\omega)} p(\omega) \ ,
+  X_{\#} (p \cdot \mu) B = (p \cdot \mu)(X^{-1})(B)) = \int (X^{-1}(B)) p \ d\mu = \int (B)
+\circ X p \ d\mu \ .
+\end{equation*}
+It follows, by linearity, that for each non-negative
+simple function $\phi$ it holds
+\begin{equation*}
+  \int_\Omega \phi \circ X \ p \ d\mu = \int_S \phi \ dX_{\#} (p \cdot d\mu) \ .
+\end{equation*}
+By approximation from
+below the equality holds for all non-negative measurable function.
+%  In
+% conclusion, the push-forward measure is characterised by the
+% \emph{change of variable} formula
+% \begin{equation*}
+%   \int f \circ X \ d\mu = \int f dX_{\#}\mu \ , \quad f \in \mathcal L^+
+% \end{equation*}
+% In the case the measure is actually a probability measure defined by a density $p$,
+% \begin{equation*}
+%  \int f \ d(X_{\#}p \cdot \mu) = \int f \circ X d (p \cdot \mu) = \int f \circ X p \ d\mu 
+% \end{equation*}
+
+\emph{Assume there exists a $\hat p$ such that the LHS equals
+$\int \phi \circ X \ \hat p \circ X \ d\mu$.} Then, we can apply again the
+change of variable for $\mu$, and get
+\begin{equation*}
+  \int \phi \ d(X_{\#} p \cdot \mu) = \int \phi \ \hat p \ dX_{\#}\mu = \int \phi d \ \hat p \cdot X_{\#} \mu \ .
+\end{equation*}
+As $\phi$ is arbitrary, we have computed the effect on the density of the push forward:
+\begin{equation}\label{eq:push-forward-density}
+  X_{\#}(p \cdot \mu) = \hat p \cdot X_{\#} \mu \quad \text{where} \forall \phi \in \mathcal L^+ \ \quad \int \phi \circ X p \ d\mu = \int \phi \circ X \hat p \circ X \ d\mu \ .
+\end{equation}
+
+Note that the arguments above are general, they do not depend on the
+sample space being finite. The random variable $\hat p \circ X$ is the
+\emph{conditional expectation} of $p$ to be discussed later. See
+\cite[\S~IV.2]{malliavin:1995}, \cite[Ch.~23]{jacod|protter:2003}. It
+is proved either by a projection argument, as in the quoted textbooks)
+or by Radon-Nykodim theorem \cite[\S~6.10]{rudin:1987-3rd}.
+
+A probability function $p$ is a density with respect to the counting measure. If $\Omega$ is finite, then the counting measure $\#(A) = \text{number of elements of $A$}$ is such that $\int_A p d\# = \sum_{\omega \in A} p(\omega)$. Consider now the push forward. \Cref{eq:push-forward-density} becomes
+\begin{equation*}
+  \int \phi \circ X \ p \ d\# = \sum_\omega \phi(X(\omega)) p(\omega) = \sum_{x \in \operatorname{Im}X} \phi(x) \sum_{x = X(\omega)} p(\omega) \ ,
 \end{equation*}
 which, in turn, gives $\hat p(x) = \sum_{x = X(\omega)} p(\omega)$. Usually, one writes $p_X$ to denote the push-forward density.
+
+\begin{example}
+  For $\omega = \set{0,1}^n$ and $\theta \in ]0,1[$, define
+  \begin{equation*}
+    p(\omega) = p(x_1,\dots,x_n) = \prod_{j=1}^n \theta^{x_j} (1 - \theta)^{1-x_j} = (1-\theta)^n \left(\frac{\theta}{1-\theta}\right)^{\sum_j x_j} = \hat p \left(\sum_j x_j\right) \ ,
+  \end{equation*}
+with $\hat p(x) = (1-\theta)^n (\theta/(1-\theta))^x$. $p$ is a probability function because
+\begin{equation*}
+  \sum_{x_1,\dots,x_n = 0,1} \prod_{j=1}^n \theta^{x_j} (1 - \theta)^{1-x_j} = \prod_{j=1}^n (\theta + (1 - \theta))
+  = 1 \ .
+\end{equation*}
+Consider now the mapping $X \colon \omega \ni (x_1,\dots,x_n) \mapsto \sum_j x_j \in S = \set{0,\dots,n}$. The push-forward of the counting measure is given by
+\begin{equation*}
+  \int \phi \circ X \ d\# = \sum_{x_1,\dots,x_n} \phi\left(\sum_j x_j\right)  = \sum_{x=0}^n \phi(x) \binom n x = \int \phi \ dX_\# \mu 
+\end{equation*}
+The push-forward of the \emph{Bernoulli} probability measure, that is, the probability measure with probability function $p$ is the \emph{Binomial} probability measure, that is, the probability measure with probability function $x \mapsto \binom n x \theta^x (1-\theta)^{n-x}$.
+\end{example}
 
 \subsection{Inequalities for the expectation}
 \label{sec:ineg-expect}
@@ -545,7 +608,7 @@ The case $a=1$ has an immediate proof. If $a > 1$ use $(X+Y)^a = X(X+Y)^{a-1} + 
 \begin{example}[$L^2$-convergence and Weak LLN] Consider the Bernoulli $n$-scheme and define $S_n=X_1+\cdots+X_n$. Then $\expectat \theta {S_n/n} = \theta$ and $\expectat \theta {\left(\frac {S_n}n - \theta\right)^2} = \frac1n \theta(1-\theta) \to 0$ as $n \to \infty$.
 \end{example}
 
-\begin{example}[Cramer inequality and Strong LLN] \label{ex:cramer}
+\begin{exercise}[Cramer inequality and Strong LLN] \label{ex:cramer}
 Let $p$ be a probability function, $X$ a real random variable, $c >0$. For all $t > 0$,
 \begin{equation*}
   \probat p { X \geq c} = \probat p {tX \geq ct} = \probat p
@@ -579,7 +642,7 @@ so that
   \kappa(t) = n \logof{\theta \euler^t + (1 - \theta)} \ , \quad \kappa'(t) = n \frac{\theta\euler^t}{\theta \euler^t + (1 - \theta)} \ .
 \end{equation*}
 The optimum value for the inequality is explicitly computable.\footnote{The relation with the Strong LLN appears when evaluating the dependence on $n$. To be discussed later}.
-\end{example}
+\end{exercise}
 
 \section{Exponential expression of the open simplex $\Delta^\circ(\Omega)$}
 \label{sec:expon-expr-delt}
