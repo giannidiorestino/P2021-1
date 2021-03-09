@@ -608,8 +608,8 @@ The case $a=1$ has an immediate proof. If $a > 1$ use $(X+Y)^a = X(X+Y)^{a-1} + 
 \begin{example}[$L^2$-convergence and Weak LLN] Consider the Bernoulli $n$-scheme and define $S_n=X_1+\cdots+X_n$. Then $\expectat \theta {S_n/n} = \theta$ and $\expectat \theta {\left(\frac {S_n}n - \theta\right)^2} = \frac1n \theta(1-\theta) \to 0$ as $n \to \infty$.
 \end{example}
 
-\begin{exercise}[Cramer inequality and Strong LLN] \label{ex:cramer}
-Let $p$ be a probability function, $X$ a real random variable, $c >0$. For all $t > 0$,
+\begin{exercise}[Cramer inequality] \label{ex:cramer}
+Let $p$ be a probability function on $\Omega$, $X$ a non-constant real random variable, and $c >0$. For all $t > 0$,
 \begin{equation*}
   \probat p { X \geq c} = \probat p {tX \geq ct} = \probat p
   {\euler^{tX} \geq \euler^{ct}} \leq \frac1{\euler^{ct}} \expectat p {\euler^{tX}} = \expof{- \left(ct - \log\expectat p {\euler^{tX}}\right)} \ . 
@@ -620,15 +620,36 @@ The function $\kappa \colon t \mapsto \log \expectat p {\euler^{tX}}$ is convex 
   \kappa'(t) = \frac{\expectat p {X \euler^{tX}}}{\expectat p {\euler^{tX}}} 
 \end{equation*}
 and
+\begin{multline*}
+  \kappa''(t) = \frac{\expectat p {X^2\euler^{tX}}\expectat p {\euler^{tX}} - \expectat p {X\euler^{tX}}^2}{\expectat p {\euler^{tX}}^2} = \\ \frac{\expectat p {\left(X - \expectat p {X \euler^{tX}}/\expectat p {\euler^{tX}} \right)^2 \euler^{tX}}}{\expectat p {\euler^{tX}}} > 0 \ .
+\end{multline*}
+To get a better understanding of the previous computation, let us define a family of probability functions
 \begin{equation*}
-  \kappa''(t) = \frac{\expectat p {X^2\euler^{tX}}\expectat p {\euler^{tX}} - \expectat p {X\euler^{tX}}^2}{\expectat p {\euler^{tX}}^2} = \frac{\expectat p {(X - \expectat p X)^2 \euler^{tX}}}{\expectat p {\euler^{tX}}} > 0 \ .
+  q(\omega;t) = \expectat p {\euler^{tX}}^{-1} \euler^{tX(\omega)} p(\omega) \ , \quad t >0 \ .
+\end{equation*}
+It is indeed non-negative and $\sum_\omega q(\omega;t) = \expectat p {\euler^{tX}} / \expectat p {\euler^{tX}} = 1$. Now
+\begin{equation*}
+  \kappa'(t) = \frac{\expectat p {X \euler^{tX}}}{\expectat p {\euler^{tX}}} = \expectat {q_t} {X} 
+\end{equation*}
+and
+\begin{multline*}
+  \kappa''(t) = \frac{\expectat p {X^2\euler^{tX}}\expectat p {\euler^{tX}} - \expectat p {X\euler^{tX}}^2}{\expectat p {\euler^{tX}}^2} = \\ \expectat {q_t} {X^2} - \expectat {q_t} X ^2 = \expectat {q_t} {(X - \expectat {q_t})^2} = \varat {q_t} {X} \end{multline*}
+
+Note that $\kappa'(0) = \expectat p X$. We are interested in \emph{large deviation}, so that we assume $c > \expectat p X$.
+To get the optimal inequality we look for the sup of a concave function,
+\begin{equation*}
+  \sup_{t > 0}{(ct - \kappa(t))} \ .
+\end{equation*}
+The derivative at 0 is
+\begin{equation*}
+  \left. \derivby t (ct - \kappa(t) \right|_{t=0} = c - \kappa'(0) = c - \expectat p X > 0 \ ,
+\end{equation*}
+hence
+\begin{equation*}
+  \sup_{t > 0}{(ct - \kappa(t))} \ .
 \end{equation*}
 
-To get the optimal inequality we look for
-\begin{equation*}
-  \sup_{t \geq 0}{ct - \kappa(t)} = \sup_{t \in \reals} ct - \kappa(t) \ .
-\end{equation*}
-If $\hat t$ is the solution of $c\hat t = \kappa'(\hat t)$, then
+Assume $\hat t$ is the solution of $c\hat t = \kappa'(\hat t)$, then
 \begin{equation*}
   P_p(X \geq c) \leq \euler^{-(c\hat t - \log \expectat p {\euler^{\hat tX}})}
 \end{equation*}
@@ -641,7 +662,9 @@ so that
 \begin{equation*}
   \kappa(t) = n \logof{\theta \euler^t + (1 - \theta)} \ , \quad \kappa'(t) = n \frac{\theta\euler^t}{\theta \euler^t + (1 - \theta)} \ .
 \end{equation*}
-The optimum value for the inequality is explicitly computable.\footnote{The relation with the Strong LLN appears when evaluating the dependence on $n$. To be discussed later}.
+The optimum value for the inequality is explicitly computable.
+
+\emph{To be completed as second homework. Compute a bilateral bound, that is, a bound for $\probat p {\avalof{X - \expectat p X} \geq c}$ for $X$ binomial. Optionally, consider another example.}
 \end{exercise}
 
 \section{Exponential expression of the open simplex $\Delta^\circ(\Omega)$}
@@ -660,7 +683,9 @@ with $\theta \in ]0,1[$, $(X_1(\omega),\dots,X_n(\omega)) = \omega \in \Omega = 
     \end{equation*}
     For each $\omega$ the function $\theta \mapsto p(\omega;\theta)$ is called \emph{likelihood} of $\omega$.
 
-The parameter $\theta \in ]0,1[$ is the value of a probability or expected value, $\theta = P_p(X_j=1) = \expectat p {X_j}$. The new parameter $o = \theta/(1-\theta)$, $\theta = o/(1+o)$, represents the \emph{odds}, and $o \in ]0,+\infty[$. WE use the parameter \emph{$\log$-odds}, $\alpha = \logof{\frac{\theta}{1-\theta}}$, $\theta = \euler^\alpha/(1+\euler^\alpha)$, $\alpha \in \reals$ so that we can write the Bernoulli model in the form
+    The parameter $\theta \in ]0,1[$ is the value of a probability or expected value, $\theta = P_p(X_j=1) = \expectat p {X_j}$. The new parameter $o = \theta/(1-\theta)$, $\theta = o/(1+o)$, represents the \emph{odds}, and $o \in ]0,+\infty[$.
+
+    We use the parameter \emph{$\log$-odds}, $\alpha = \logof{\frac{\theta}{1-\theta}}$, $\theta = \euler^\alpha/(1+\euler^\alpha)$, $\alpha \in \reals$ so that we can write the Bernoulli model in the form
   \begin{equation*}
     p(\omega;\alpha) = \expof{\alpha T(\omega) - \kappa(\alpha)} \ , \quad \kappa(\alpha) = n \logof{1+\euler^\alpha} \ .
   \end{equation*}
