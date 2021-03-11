@@ -1024,7 +1024,7 @@ for example,
   (or, symmetric) if $\gamma(x,y) = \gamma(y,x)$ that is, if
   $\Gamma = \Gamma^t$. When $\gamma$ is reversible, then the two
   margins are equal, $\mu = \one^t \Gamma^t = \one^t \Gamma =
-  \nu$. Moreover, $\diag \mu P = \diag \mu Q$, so that $P=Q$ when
+  \nu$. Moreover, $\mu(x)P_{xy} = \nu(x) Q_{xy}$, so that $P=Q$ when
   $\mu > 0$. If $N = \# S$, then a generic joint probability function
   belongs to the $(N^2-1)$-simplex $\Delta(S^2)$. The set of
   reversible probability function is the subset defined by the
@@ -1034,13 +1034,30 @@ for example,
   $\binom {N} 2 = N(N-1)/2$ vertexes. Map all off-diagonal positions
   $(x,y)$ into the set $\set{x,y}$. Consider $\alpha(c)$,
   $c \in \binom S 2$, such that $\alpha(c) \geq 0$,
-  $\sum_c \alpha(c) \leq 1$. This provides a parametrization of the
-  off-diagonal elements of of $\Gamma$. Then split the remaining mass
-  on the diagonal.  \end{exercise}
+  $\sum_c \alpha(c) \leq 1$. This provides a parametrization on a
+  simplex of the off-diagonal elements of of $\Gamma$. Then put the
+  remaining probability on the diagonal.  See below the application to
+  Markov Chains.\end{exercise}
 
-\begin{example}[Earth-mover problem]
-  A transition function $P$ from $S_1$ to $S_2$ could be seen as a rule to move a fraction $P(y|x) = P_{x,y}$ of the  mass at $x \in S_1$ into the position $y \in S_2$. In this way, a total mass $\mu$ on $S_1$ is moved in a mass $\nu = \mu P$ on $S_2$. There is a joint distribution $\gamma(x,y) = P(y|x)\mu(x)$ giving the mass from $x$ that is moved to $y$. The earth-mover has given initial $\mu$ and final $\nu$ and looks for a feasible transport plan $P$. The set of feasible transport plans is convex and is better represented as a convex subset of $\Delta(S_1 \times S_2)$ via the joint distribution. Assume the transport from $x$ to $y$ has a cost $c(x,y)$ for the earth-mover. The total cost of the transport plan is $\sum_{x,y} c(x,y)P(y|x)\pi(x)$. The constrained optimization problem has an elementary solution in some cases e.g., $S_1=S_2=S$, $\#S = 3$, and the cost is a distance. 
-\end{example}
+\begin{exercise}[Earth-mover problem]
+  A transition function $P$ from $S_1$ to $S_2$ could be seen as a
+  rule to move a fraction $P(y|x) = P_{x,y}$ of the mass at
+  $x \in S_1$ into the position $y \in S_2$. In this way, a total mass
+  $\mu$ on $S_1$ is moved in a mass $\nu = \mu P$ on $S_2$. There is a
+  joint distribution $\gamma(x,y) = P(y|x)\mu(x)$ giving the mass from
+  $x$ that is moved to $y$. The earth-mover has given initial $\mu$
+  and final $\nu$ and looks for a feasible transport plan $P$. The set
+  of feasible transport plans is convex and is better represented as a
+  convex subset of $\Delta(S_1 \times S_2)$ via the joint
+  distribution. Assume the transport from $x$ to $y$ has a cost
+  $c(x,y)$ for the earth-mover. The total cost of the transport plan
+  is $\sum_{x,y} c(x,y)P(y|x)\pi(x)$. The constrained optimization
+  problem has an elementary computable solution in some cases, for
+  example, $S_1=S_2=S$, $\#S = 3$, and the cost is a distance. See a
+  previous example and the link
+  \href{https://en.wikipedia.org/wiki/Earth_mover's_distance}{Earth
+    mover's distance}
+\end{exercise}
   
 \subsection{$n$ factors and Markov chains}
 \label{sec:n-factors}
@@ -1064,7 +1081,7 @@ Given a probability function $\pi_0 \colon S$ and a transition function $P$ on $
     \condprob {X_k=x_k}{X_{k-1}=x_{k-1}, \dots X_0=x_0} = P(x_k|x_{k-1}) \ .
   \end{equation*}
 \end{enumerate}
-} The notation $X_0 \sim \pi_0$ means that the image of the base probability with $X_0$ has probability function $\pi_0$.The proof of equivalence is a simple algebraic check.
+} The notation $X_0 \sim \pi_0$ means that the image of the base probability with $X_0$ has probability function $\pi_0$. The proof of equivalence is a simple algebraic check.
 
 The distribution of each $X_k$ is, using the matrix notation for transitions,
 \begin{multline*}
@@ -1073,8 +1090,8 @@ The distribution of each $X_k$ is, using the matrix notation for transitions,
 
 An important special case appears when the initial probability function is \emph{invariant}, $\sum_{x} P(y|x) \pi_0(x) = \pi_0$, or $\pi_0 = \pi_0 P$. Note that $\pi_0$ is a left eigen-value of $P$ and $\pi_k = \pi_0$.
 
-\begin{example}[Binary Markov chain]
-Let
+\begin{example}[Binary Markov chain] The case $\# S = 2$ can be
+  explicitely computed. Let
 \begin{equation*}
   P = \begin{bmatrix} 1-\alpha & \alpha \\ \beta & 1-\beta
   \end{bmatrix}  \quad \alpha,\beta \in [0,1]
@@ -1206,7 +1223,7 @@ A \emph{relation} on a set $V$ is a subset $\mathcal E$ of $V \times V$ and its 
 In a rooted directed tree each vertex of depth $k$ can be coded as $v_0v_1\cdots v_k$ where $v_j$ range in a set of codes for the $k$-layer. Such a tree is associated to a space of events as follows. Let $\Omega$ be the set of all leaves. Then each situation is naturally associated with a set of leaves. Notice that any vertex of the tree can be chosen as a root. Different root correspond to different event trees which correspond to different ``causal explanations'' of the leaves.   
 
 \begin{example}[Probability tree]
-If interested, have a look to \cite{collazo|goergen|smith:2018}. Each directed edge $(v,w)$ of a rooted tree can be decorated with a probability $p(w|v) > 0$ in such a way that the sum of probabilities on each floret is 1, $\sum_{w \in C(v)} p(w|v) = 1$. For each leaf $\omega$ there is a unique path from the root and the product of all decorations provides a probability function on the set of leaves. The decoration are conditional probabilities for the corresponding descendant leaves. It is possible to consider dynamic models where individuals move down the tree at different speeds and, when do move, choose a child according to the assigned probabilities. All the construction is clarified on simple examples.
+Each directed edge $(v,w)$ of a rooted tree can be decorated with a probability $p(w|v) > 0$ in such a way that the sum of probabilities on each floret is 1, $\sum_{w \in C(v)} p(w|v) = 1$. For each leaf $\omega$ there is a unique path from the root and the product of all decorations provides a probability function on the set of leaves. The decoration are conditional probabilities for the corresponding descendant leaves. It is possible to consider dynamic models where individuals move down the tree at different speeds and, when do move, choose a child according to the assigned probabilities. All the construction is clarified on simple examples.
 \end{example}
 
 \begin{example}[Conditional independence]
