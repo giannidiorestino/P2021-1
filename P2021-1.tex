@@ -482,15 +482,15 @@ case $\phi = (B)$.
 
 The integral with respect to the push-forward of
 a probability measure given by a density is computed as
-follows.
+follows. For $B \in \mathcal S$,
 \begin{equation*}
-  X_{\#} (p \cdot \mu) B = (p \cdot \mu)(X^{-1})(B)) = \int (X^{-1}(B)) p \ d\mu = \int (B)
+  X_{\#} (p \cdot \mu) (B) = (p \cdot \mu)(X^{-1}(B)) = \int (X^{-1}(B)) p \ d\mu = \int (B)
 \circ X p \ d\mu \ .
 \end{equation*}
 It follows, by linearity, that for each non-negative
 simple function $\phi$ it holds
 \begin{equation*}
-  \int_\Omega \phi \circ X \ p \ d\mu = \int_S \phi \ dX_{\#} (p \cdot d\mu) \ .
+  \int_\Omega \phi \circ X \ p \ d\mu = \int_S \phi \ dX_{\#} (p \cdot \mu) \ .
 \end{equation*}
 By approximation from
 below the equality holds for all non-negative measurable function.
@@ -530,7 +530,7 @@ A probability function $p$ is a density with respect to the counting measure. If
 which, in turn, gives $\hat p(x) = \sum_{x = X(\omega)} p(\omega)$. Usually, one writes $p_X$ to denote the push-forward density.
 
 \begin{example}
-  For $\omega = \set{0,1}^n$ and $\theta \in ]0,1[$, define
+  For $\Omega = \set{0,1}^n$ and $\theta \in ]0,1[$, define
   \begin{equation*}
     p(\omega) = p(x_1,\dots,x_n) = \prod_{j=1}^n \theta^{x_j} (1 - \theta)^{1-x_j} = (1-\theta)^n \left(\frac{\theta}{1-\theta}\right)^{\sum_j x_j} = \hat p \left(\sum_j x_j\right) \ ,
   \end{equation*}
@@ -609,7 +609,7 @@ The case $a=1$ has an immediate proof. If $a > 1$ use $(X+Y)^a = X(X+Y)^{a-1} + 
 \end{example}
 
 \begin{exercise}[Cramer inequality] \label{ex:cramer}
-Let $p$ be a probability function on $\Omega$, $X$ a non-constant real random variable, and $c >0$. For all $t > 0$,
+Let $p$ be a probability function on $\Omega$, $X$ a non-constant real random variable, and $c \in \reals$. For all $t > 0$,
 \begin{equation*}
   \probat p { X \geq c} = \probat p {tX \geq ct} = \probat p
   {\euler^{tX} \geq \euler^{ct}} \leq \frac1{\euler^{ct}} \expectat p {\euler^{tX}} = \expof{- \left(ct - \log\expectat p {\euler^{tX}}\right)} \ . 
