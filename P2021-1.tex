@@ -1019,18 +1019,28 @@ for example,
   \end{bmatrix}
 \end{equation*}
 
-\begin{exercise}[Reversibility]
+\begin{exercise}[Reversible transition]
   A probability function $\gamma$ on $S^2 = S \times S$ is reversible
   (or, symmetric) if $\gamma(x,y) = \gamma(y,x)$ that is, if
   $\Gamma = \Gamma^t$. When $\gamma$ is reversible, then the two
   margins are equal, $\mu = \one^t \Gamma^t = \one^t \Gamma =
-  \nu$. Moreover, $\mu(x)P_{xy} = \nu(x) Q_{xy}$, so that $P=Q$ when
-  $\mu > 0$. If $N = \# S$, then a generic joint probability function
-  belongs to the $(N^2-1)$-simplex $\Delta(S^2)$. The set of
-  reversible probability function is the subset defined by the
-  $\binom N 2 = N(N-1)/2$ symmetry constraints then has
-  $(N^2-1) - N(N-1)/2 = N(N+1)/2-1$ degrees of freedom. It is a
-  bounded polyhedron hence a polytope. It is interesting to find its
+  \nu$. Moreover, $\mu(x)P_{xy} = \nu(x) Q_{xy} = \mu(x)Q_{xy}$, so
+  that $P=Q$ when $\mu > 0$.
+
+  Conversely, if $P$ is a transition, and there exists a
+  $\kappa(x) > 0$, $x \in S$, such that
+  $kappa(x) P_{xy} = \kappa(y)P_{y,x}$, then
+  $\sum_x \kappa(x) P_{x,y} = \kappa(y)$ and
+  $\pi(x) = \kappa(x) / \sum_z \kappa(z)$ is a probability function
+  such that $\gamma(x,y) = \pi(x) P_{x,y}$ is reversible. See below
+  random walks.
+
+  If $N = \# S$, then a generic joint
+  probability function belongs to the $(N^2-1)$-simplex
+  $\Delta(S^2)$. The set of reversible probability function is the
+  subset defined by the $\binom N 2 = N(N-1)/2$ symmetry constraints
+  then has $(N^2-1) - N(N-1)/2 = N(N+1)/2-1$ degrees of freedom. It is
+  a bounded polyhedron hence a polytope. It is interesting to find its
   $\binom {N} 2 = N(N-1)/2$ vertexes. Map all off-diagonal positions
   $(x,y)$ into the set $\set{x,y}$. Consider $\alpha(c)$,
   $c \in \binom S 2$, such that $\alpha(c) \geq 0$,
