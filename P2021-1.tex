@@ -913,7 +913,7 @@ P(y|x)$.
 
 More generally, if $f \colon S \to \reals$, the mapping
 \begin{equation*}
-  S \ni (x,y) \mapsto \expectat {P(\cdot|x)} {f(x,\cdot)} 
+  S \ni x \mapsto \expectat {P(\cdot|x)} {f(x,\cdot)} 
 \end{equation*}
 is a real random variable on $\Omega$ which depends on $x$ only and is
 called conditional expectation.
@@ -928,9 +928,9 @@ In the case of generic random variables, we have a sample space $\Omega$ with a 
 The usual terminology is a follows:
 $p_{XY}$ is the joint probability function; $p_X$ is the probability function of $X$ and $p_Y$ is the probability function of $Y$; $P$ is the probability function of $Y$ given $X$; $Q$ is the probability function of $X$ given $Y$.
 
-\emph{If one of the conditional probability functions is constant say, $P(y|x) = P(y)$, then $p_{XY}(x,y) = p_X(x) p_Y(y)$ and we say that $Y$ and $Y$ are independent}. In such a case, the other marginal probability function is constant. Equivalently, we can say that \emph{the distribution of $(X,Y)$ is a product probability measure.}
+\emph{If one of the conditional probability functions is constant say, $P(y|x) = P(y)$, then $p_{XY}(x,y) = p_X(x) p_Y(y)$ and we say that $X$ and $Y$ are independent}. In such a case, the other marginal probability function is constant. Equivalently, we can say that \emph{the distribution of $(X,Y)$ is a product probability measure.}
 
-Let $Z = \phi(X,Y)$ be a real random variable in the space of random variable measurable with respect to $X$ and $T$, $L(X,Y)$. Then
+Let $Z = \phi(X,Y)$ be a real random variable in the space of random variable measurable with respect to $X$ and $Y$, $L(X,Y)$. Then
 $\expectat p Z = \expectat {p_{XY}} \phi$ because of the change of
 variable formula. Consider the function
 \begin{equation*}
@@ -941,7 +941,7 @@ and define
   \condexpat p {\phi(X,Y)}{X} = \hat \phi(X)
 \end{equation*}
 
-\emph{If $X$ and $Y$ are independent, then the conditional expectation is constant and equal to the expectation.}
+\emph{If $X$ and $Y$ are independent, then the conditional expectation equals to the partial expectation.}
 
 \emph{The conditional expectation computed above is characterized by the following two defining properties.
   \begin{enumerate}
