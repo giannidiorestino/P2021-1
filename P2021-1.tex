@@ -1029,7 +1029,7 @@ for example,
 
   Conversely, if $P$ is a transition, and there exists a
   $\kappa(x) > 0$, $x \in S$, such that
-  $kappa(x) P_{xy} = \kappa(y)P_{y,x}$, then
+  $\kappa(x) P_{xy} = \kappa(y)P_{y,x}$, then
   $\sum_x \kappa(x) P_{x,y} = \kappa(y)$ and
   $\pi(x) = \kappa(x) / \sum_z \kappa(z)$ is a probability function
   such that $\gamma(x,y) = \pi(x) P_{x,y}$ is reversible. See below
@@ -1077,7 +1077,7 @@ Consider a finite set $S$ and the sample space $\Omega = S^{n+1}$, $\Omega \ni \
 
 Given a probability function $\pi_0 \colon S$ and a transition function $P$ on $S$, we define the joint probability function
 \begin{equation*}
-  \gamma(x_1,\dots,x_n) = \left(\prod_{j=1}^n P(x_j|x_{j-1})\right) \pi_0(x_0) = \pi_0(x_0) \prod_{j=1}^n P_{x_{j-1},x_j} \ .
+  \gamma(x_0,x_1,\dots,x_n) = \left(\prod_{j=1}^n P(x_j|x_{j-1})\right) \pi_0(x_0) = \pi_0(x_0) \prod_{j=1}^n P_{x_{j-1},x_j} \ .
   \end{equation*}
   Notice the probabilistic notation (middle side) and the matrix notation (right hand side).
   
@@ -1098,7 +1098,7 @@ The distribution of each $X_k$ is, using the matrix notation for transitions,
   \pi_k(x_k) = \probat \gamma {X_k=x_k} = \sum_{x_0,\dots,x_{k-1}} \sum_{x_{k+1},\dots,x_n} \pi_0(x_0) \prod_{j=1}^n P(x_{j-1},x_j) = \\ \sum_{x_0,\dots,x_{k-1}} \pi_0(x_0) \prod_{j=1}^k P(x_{j-1},x_j) = \sum_{x_0} \pi_0(x_0) \sum_{x_1,\dots,x_{k-1}} \prod_{j=1}^k P(x_{j-1},x_j) = \\ \pi_0 P^k(x_k) 
 \end{multline*}
 
-An important special case appears when the initial probability function is \emph{invariant}, $\sum_{x} P(y|x) \pi_0(x) = \pi_0$, or $\pi_0 = \pi_0 P$. Note that $\pi_0$ is a left eigen-value of $P$ and $\pi_k = \pi_0$.
+An important special case appears when the initial probability function is \emph{invariant}, $\sum_{x} P(y|x) \pi_0(x) = \pi_0$, or $\pi_0 = \pi_0 P$. Note that $\pi_0$ is a left eigen-vector with eigen-value 1 of $P$ and $\pi_k = \pi_0$.
 
 \begin{example}[Binary Markov chain] The case $\# S = 2$ can be
   explicitely computed. Let
@@ -1159,7 +1159,7 @@ The first eigen-vector is a vector
   \end{bmatrix}
 \quad \text{such that} \quad 
   \begin{bmatrix}
-  -\alpha & \alpha \\ -\beta & \beta 
+  -\alpha & \alpha \\ \beta & -\beta 
 \end{bmatrix}
 \begin{bmatrix}
   u_{11} \\ u_{21}
@@ -1223,8 +1223,22 @@ Assume $\alpha+\beta\neq 2$, so that $-1 < 1-\alpha-\beta < 1$. We have
 \ .
 \end{multline*}
 
-In conclusion: if $\alpha+\beta = 0$ all probability functions are invariant and there is no convergence to the invariant probability; If $\alpha+\beta > 0$ there is a unique invariant probability. If moreover $\alpha+\beta \neq 2$ there is convergence. Another interesting case happens when $\alpha=0$ while $\beta > 0$. 
-  
+In conclusion: 
+\begin{enumerate}
+    \item 
+if $\alpha+\beta = 0$ all probability functions are invariant and there is no convergence to the invariant probability; 
+\item If $\alpha+\beta > 0$ there is a unique invariant probability. 
+\item If moreover $\alpha+\beta \neq 2$ there is convergence. \item Another interesting case happens when $\alpha=0$ while $\beta > 0$. 
+\end{enumerate} 
+
+The joint probability function of a couple of successive realization $(X_{k-1},X_k)$ is the stationary regime is 
+\begin{equation*}\begin{bmatrix}
+  \frac{\beta}{\alpha+\beta} (1-\alpha)& \frac{\beta}{\alpha+\beta} \alpha\\  \frac{\alpha}{\alpha+\beta}\beta &   \frac{\alpha}{\alpha+\beta}(1-\beta)
+\end{bmatrix} = \frac1{\alpha+\beta}\begin{bmatrix}
+  (1-\alpha)\beta & \alpha\beta \\ \alpha\beta & \alpha(1-\beta) \ .
+\end{bmatrix}
+\end{equation*}
+It is always symmetric because $\#S =2$, a special case.
 \end{example}
 
 \subsection{Aside: graphs}
@@ -1233,7 +1247,10 @@ A \emph{relation} on a set $V$ is a subset $\mathcal E$ of $V \times V$ and its 
 In a rooted directed tree each vertex of depth $k$ can be coded as $v_0v_1\cdots v_k$ where $v_j$ range in a set of codes for the $k$-layer. Such a tree is associated to a space of events as follows. Let $\Omega$ be the set of all leaves. Then each situation is naturally associated with a set of leaves. Notice that any vertex of the tree can be chosen as a root. Different root correspond to different event trees which correspond to different ``causal explanations'' of the leaves.   
 
 \begin{example}[Probability tree]
-Each directed edge $(v,w)$ of a rooted tree can be decorated with a probability $p(w|v) > 0$ in such a way that the sum of probabilities on each floret is 1, $\sum_{w \in C(v)} p(w|v) = 1$. For each leaf $\omega$ there is a unique path from the root and the product of all decorations provides a probability function on the set of leaves. The decoration are conditional probabilities for the corresponding descendant leaves. It is possible to consider dynamic models where individuals move down the tree at different speeds and, when do move, choose a child according to the assigned probabilities. All the construction is clarified on simple examples.
+Each directed edge $(v,w)$ of a rooted tree can be decorated with a probability $p(w|v) > 0$ in such a way that the sum of probabilities on each floret is 1, $\sum_{w \in C(v)} p(w|v) = 1$. For each leaf $\omega$ there is a unique path from the root and the product of all decorations provides a probability function on the set of leaves. The decoration are conditional probabilities for the corresponding descendant leaves. It is possible to consider dynamic models where individuals move down the tree at different speeds and, when do move, choose a child according to the assigned probabilities. All the construction is clarified on simple examples. For example, consider the case where you toss a fair coin. If H, you trow a dice. The outcome is 0 to 6. 
+end{example}
+
+\begin{example}[Markov chain on a tree] The sample space is $\Omega=\set{S,I,R}$. You start as $S$ and the possible transition is to $S$ of $I$. The transition from $I$ is to $I$ or $R$. From $R$ you can go only to $R$.
 \end{example}
 
 \begin{example}[Conditional independence]
