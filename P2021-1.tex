@@ -1287,12 +1287,11 @@ we sum the previous relation over $x$ to get
   \sum_{x \in S} \pi(x)P_{x,y} = \pi(y) \sum_{x\in S} P_{y,x} = \pi(y) \ ,
 \end{equation*}
 so that $\pi$ is indeed an invariant probability and the MC constructed from $\pi$ and $P$ is reversible.
-
-Given a Markov matrix $P$, if there exists a positive function $\kappa \colon S$ such that $\kappa(x)P_{x,y} = \kappa(y)P_{y,x}$ then we can normalize $\kappa$. In such a case we have an immediate way to compute the invariant probability.
 \end{example}
 
-\begin{example}
-Let $G = (S,\mathcal E)$ be a graph. For each vertex $x \in S$ the \emph{degree} of $x$, $\deg x$, is the number of edges from $x$. Let $E$ be the \emph{adjacency matrix} of $G$. The degree as a row vector is $E \one$. Define the Markov matrix
+\begin{example}[Random walk on a graph]
+Given a Markov matrix $P$, if there exists a positive function $\kappa \colon S$ such that $\kappa(x)P_{x,y} = \kappa(y)P_{y,x}$ then we can normalize $\kappa$. In such a case we have a simple way to compute the invariant probability. 
+Here is an example. Let $G = (S,\mathcal E)$ be an undirected graph. For each vertex $x \in S$ the \emph{degree} of $x$, $\deg x$, is the number of edges from $x$. Let $E$ be the \emph{adjacency matrix} of $G$. The degree as a column vector is $E \one$. Define the Markov matrix
 \begin{equation*}
   P = \diagof{E \one}^{-1} E \ . 
 \end{equation*}
@@ -1315,7 +1314,7 @@ It follows that the invariant probability is
 and the MC is reversible.
 \end{example}
 
-\begin{example}[Hastings-Metropolis]
+\begin{example}[Metropolis-Hastings algorithm fo MCMC]
 Consider the following problem: Given a Markov matrix $Q$ on a finite $S$ and a probability function $\pi$ on $S$, define the matrix
 \begin{equation*}
   P_{x,y} =
@@ -1327,7 +1326,7 @@ Consider the following problem: Given a Markov matrix $Q$ on a finite $S$ and a 
 where $0 \leq \alpha(x,y) \leq 1$
 Notice that $P_{x,y} \ge 0$ and 
 \begin{equation*}
-  \sum_{y \in S} P_{x,y} = \sum_{y \neq x} Q_{x,y}\alpha(x,y) + Q_{x,x} + \sum_{z \neq x} Q_{x,z}(1 - \alpha(x,z))  = Q_{x,x} + \sum_{z \neq x} Q_{x,z} = 1 \ .
+  \sum_{y \in S} P_{x,y} = \sum_{y \colon y \neq x} Q_{x,y}\alpha(x,y) + Q_{x,x} + \sum_{z \colon z \neq x} Q_{x,z}(1 - \alpha(x,z))  = Q_{x,x} + \sum_{z \colon z \neq x} Q_{x,z} = 1 \ .
 \end{equation*}
 
 The Markov matrix $P$ is reversible with invariant probability $\pi$ if
@@ -1339,6 +1338,8 @@ One possible choice is
 \begin{equation*}
   \alpha(x,y) = 1 \wedge \frac{\pi(y)Q_{y,x}}{\pi(x)Q_{x,y}} \ .
 \end{equation*}
+
+See the \href{https://en.wikipedia.org/wiki/Metropolis-Hastings_algorithm}{Wikipedia entry}.
 \end{example}
 
 \bibliography{tutto}%
